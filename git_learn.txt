@@ -14,7 +14,7 @@ Window下
 
 创建版本库
 	进入需要管理的目录，通过 git init 初始化一个Git仓库；
-	通过 git add <file> 将文件修改提交到缓存区
+	通过 git add <file> 将文件修改提交到暂存区
 	通过 git commit 将暂存区的文件提交到版本库
 	
 git status 了解当前仓库的状态；
@@ -27,7 +27,8 @@ git checkout --<file> 把文件在工作区的修改全部撤销，分两种情�
 	2. 文件添加到暂存区后修改，撤销修改就是回到暂存区的状态。 
 	总之，是回到文件最近一次 git commit 或 git add 时的状态
 git reset HEAD <file> 可以把暂存区的修改撤销掉
-git rm 用于删除一个文件
+git rm 用于删除一个文件，该指令只是把修改提交到暂存区，若用删掉版本库中文件，还需输入 git commit 提交
+
 
 	
 
