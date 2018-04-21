@@ -29,7 +29,29 @@ git checkout --<file> 把文件在工作区的修改全部撤销，分两种情�
 git reset HEAD <file> 可以把暂存区的修改撤销掉
 git rm 用于删除一个文件，该指令只是把修改提交到暂存区，若用删掉版本库中文件，还需输入 git commit 提交
 
+由于本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置：
+	第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+	ssh-keygen -t rsa -C "email@example"
+	如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人
+	第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+	然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+	点“Add Key”，你就应该看到已经添加的Key：
+	为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。
+	当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
 
+create a new repository on the command line
+	echo "# learn-git" >> README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git remote add origin git@github.com:xintiao14/learn-git.git
+	git push -u origin master
+push an existing repository from the command line
+	git remote add origin git@github.com:xintiao14/learn-git.git
+	git push -u origin master
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 	
 
 
